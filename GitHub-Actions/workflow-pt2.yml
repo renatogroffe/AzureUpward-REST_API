@@ -1,0 +1,13 @@
+    - name: Login no Azure Container Registry
+      uses: Azure/docker-login@v1
+      with:
+        username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
+        password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
+        login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY_SERVER }}
+
+    - name: Build e Push no Azure Container Registry
+      run: |
+        cd ./APIProdutos
+        docker build . --file Dockerfile --tag ${{ env.IMAGEM_AZURE }}:latest
+        docker tag ${{ env.IMAGEM_AZURE }}:latest ${{ env.IMAGEM_AZURE }}:$GITHUB_RUN_NUMBER
+        docker push ${{ env.IMAGEM_AZURE }}

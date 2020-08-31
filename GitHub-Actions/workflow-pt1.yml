@@ -1,0 +1,4 @@
+    env:
+      NOME_IMAGEM: apiprodutos
+      NOME_WEBAPP: ?
+      IMAGEM_AZURE: ${{ secrets.AZURE_CONTAINER_REGISTRY_SERVER }}/$NOME_IMAGEM
